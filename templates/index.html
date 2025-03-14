@@ -9,60 +9,14 @@
 
 <h1>Find Events in Your City</h1>
 
+<!-- Form to collect city and date -->
 <form action="/get_events" method="post">
     <label>Enter City:</label>
     <input type="text" name="city" required>
     <label>Select Date:</label>
     <input type="date" name="date" required>
-    <button type="submit">Search Events</button>
+    <button type="submit">Submit</button>
 </form>
-
-<h2>Events:</h2>
-
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% endif %}
-
-{% if events %}
-    <ul>
-        {% for event in events %}
-            <li>
-                <strong>{{ event["Event Name"] }}</strong> -
-                {% if event["Event Link"] %}
-                    <a href="{{ event['Event Link'] }}" target="_blank">View Event</a>
-                {% else %}
-                    <span style="color: gray;">(No Link Available)</span>
-                {% endif %}
-                <br>
-
-                <strong>Date:</strong> {{ event["Date"] }} <br>
-
-                <strong>Venue:</strong>
-                {% if event["Venue Link"] %}
-                    <a href="{{ event['Venue Link'] }}" target="_blank">{{ event["Venue Name"] }}</a>
-                {% else %}
-                    {{ event["Venue Name"] }}
-                {% endif %}
-                <br>
-
-                <strong>Artists:</strong>
-                {% if event["Artists"] %}
-                    {{ event["Artists"] | join(", ") }}
-                {% else %}
-                    <span style="color: gray;">No Artists Listed</span>
-                {% endif %}
-                <br>
-
-                {% if event["Flyer Image"] %}
-                    <img src="{{ event['Flyer Image'] }}" alt="Flyer" width="200">
-                {% endif %}
-                <hr>
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p style="color: red;">No events found.</p>
-{% endif %}
 
 </body>
 </html>
